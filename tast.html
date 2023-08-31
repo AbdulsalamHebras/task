@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tasks</title>
+    <style>
+        .task-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tasks</h1>
+
+    <div>
+        <input type="text" id="taskInput" placeholder="Enter task">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <div id="taskList"></div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskList = document.getElementById("taskList");
+
+            const task = document.createElement("div");
+            task.className = "task-card";
+
+            const taskText = document.createElement("span");
+            taskText.textContent = taskInput.value;
+
+            const updateButton = document.createElement("button");
+            updateButton.textContent = "Update";
+            updateButton.onclick = function () {
+                const updatedTask = prompt("Enter updated task", taskText.textContent);
+                if (updatedTask !== null) {
+                    taskText.textContent = updatedTask;
+                }
+            };
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = function () {
+                task.remove();
+            };
+
+            task.appendChild(taskText);
+            task.appendChild(updateButton);
+            task.appendChild(deleteButton);
+
+            taskList.appendChild(task);
+
+            taskInput.value = "";
+        }
+    </script>
+</body>
+
+</html>
